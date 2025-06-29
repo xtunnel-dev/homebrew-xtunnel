@@ -1,7 +1,7 @@
 class Xtunnel < Formula
   desc "Lightweight ngrok alternative tunnel utility"
   homepage "https://xtunnel.ru"
-  version "1.0.17"
+  version "1.0.17.1"
 
   on_macos do
     if Hardware::CPU.arm?
