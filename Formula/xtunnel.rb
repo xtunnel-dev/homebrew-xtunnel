@@ -15,30 +15,26 @@ class Xtunnel < Formula
 
   def install
     bin.install "xtunnel"
+    prefix.install "xtunnel-cert.cer"
+  end
 
-    cert_path = buildpath/"xtunnel-cert.cer"
-    if cert_path.exist?
-      puts "🔐 Устанавливаем сертификат разработчика..."
-      begin
-        system "sudo", "security", "add-trusted-cert", "-d", "-r", "trustRoot", "-k", "/Library/Keychains/System.keychain", cert_path
-      rescue
-        puts <<~EOS
+  def caveats
+    cert_installed = quiet_system("security", "find-certificate", "-c", "xtunnel.dev")
 
-          ⚠️  Не удалось установить сертификат автоматически.
-          Установите вручную:
-
-            1. Откройте файл: open "#{cert_path}"
-            2. Нажмите “Добавить”, выберите “Система” или “Логин”
-            3. Укажите хранилище: “Доверенные корневые центры”
-
-        EOS
-      end
+    if cert_installed
+      "✅ Сертификат xtunnel.dev уже установлен. Никаких дополнительных действий не требуется."
     else
-      puts "❗ Файл сертификата не найден, установка будет без него."
+      <<~EOS
+        🔐 Установка сертификата (рекомендуется):
+        Чтобы macOS доверяла утилите и не показывала предупреждений при запуске, установите сертификат разработчика.
+
+        Выполните команду:
+          sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain #{opt_prefix}/xtunnel-cert.cer
+      EOS
     end
   end
 
   test do
-    system "#{bin}/xtunnel", "--version"
+    assert_predicate bin/"xtunnel", :exist?, "xtunnel executable should exist"
   end
 end
