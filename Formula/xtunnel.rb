@@ -1,15 +1,15 @@
 class Xtunnel < Formula
   desc "Lightweight ngrok alternative tunnel utility"
   homepage "https://xtunnel.ru"
-  version "2.1.0"
+  version "2.1.1"
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://dl.xtunnel.ru/v2.1.0/xtunnel-v2.1.0-osx-arm64.tar.gz"
-      sha256 "5f4ebf77fd9e533e021aacc1d87d451b0a23df8f612030a723d2c70e7c8e856d"
+      url "https://dl.xtunnel.ru/v2.1.1/xtunnel-v2.1.1-osx-arm64.tar.gz"
+      sha256 "a19507ae68373bbebd2707b078ec45092a632358a9e1d5991e34e42ae906be9c"
     else
-      url "https://dl.xtunnel.ru/v2.1.0/xtunnel-v2.1.0-osx-x64.tar.gz"
-      sha256 "275a498394e5724173f022aa62fab3bce24d57be3fece622704716139f08a9ab"
+      url "https://dl.xtunnel.ru/v2.1.1/xtunnel-v2.1.1-osx-x64.tar.gz"
+      sha256 "9b6d5a7391a908a6785bc8e067075fd8e9f03be87a8b79bade26b9137de8760c"
     end
   end
 
